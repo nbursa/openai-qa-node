@@ -1,6 +1,6 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/example/public_html/chatgpt-qa
+    - export DEPLOYPATH=/home/nenadbur/public_html/chatgpt-qa/
     - npm run export
     - /bin/cp -a /_static/. $DEPLOYPATH
