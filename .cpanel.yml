@@ -3,4 +3,4 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/nenadbur/chatgpt-qa.nenadbursac.com/
     - npm run export
-    - /bin/cp -a /_static/. $DEPLOYPATH
+    - /bin/cp -R /_static/. $DEPLOYPATH
