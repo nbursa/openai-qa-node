@@ -44,6 +44,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <img src="/openai.svg" className={styles.icon} />
+        <h2>Chat GPT-3</h2>
         <h3>Q&A</h3>
         <p>
           I am a highly intelligent question answering bot. <br />
