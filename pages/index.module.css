@@ -20,7 +20,7 @@
 .main input {
   font-size: 16px;
   line-height: 24px;
-  color: #353740;
+  color: #fff;
   font-family: "ColfaxAI", Helvetica, sans-serif;
 }
 .main {
@@ -37,10 +37,9 @@
   font-size: 32px;
   line-height: 40px;
   font-weight: bold;
-  color: #202123;
   margin: 16px 0 40px;
 }
-.main h4 {
+.main > p {
   max-width: 400px;
 }
 .main form {
@@ -54,6 +53,7 @@
   border: 1px solid #10a37f;
   border-radius: 4px;
   margin-bottom: 24px;
+  background-color: #161b22;
 }
 .main ::placeholder {
   color: #8e8ea0;
@@ -73,7 +73,8 @@
   margin-top: 40px;
   width: 100%;
 }
-.main .result {
+.main .result,
+.main .result h4 {
   text-align: center;
 }
 .main .hidden {
