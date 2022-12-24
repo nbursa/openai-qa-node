@@ -1,6 +1,6 @@
 # OpenAI API Q/A - Node.js app
 
-This is an q/a generator app used in the OpenAI API. It uses the [Next.js](https://nextjs.org/) framework with [React](https://reactjs.org/). Check out the tutorial or follow the instructions below to get set up.
+This is an basic q/a generator app using OpenAI API. It's built with the [Next.js](https://nextjs.org/) framework with [React](https://reactjs.org/). Follow the instructions below to get set up.
 
 ## Setup
 
