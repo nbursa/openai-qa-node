@@ -40,6 +40,9 @@
   color: #202123;
   margin: 16px 0 40px;
 }
+.main h4 {
+  max-width: 400px;
+}
 .main form {
   display: flex;
   flex-direction: column;

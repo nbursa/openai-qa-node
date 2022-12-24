@@ -44,6 +44,13 @@ export default function Home() {
       <main className={styles.main}>
         <img src="/openai.svg" className={styles.icon} />
         <h3>Q&A</h3>
+        <h4>
+          I am a highly intelligent question answering bot. <br />
+          If you ask me a question that is rooted in truth, I will give you the
+          answer. <br />
+          If you ask me a question that is nonsense, trickery, or has no clear
+          answer, I will respond with \"Unknown\"
+        </h4>
         <form onSubmit={onSubmit}>
           <input
             type="text"
