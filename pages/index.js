@@ -52,9 +52,12 @@ export default function Home() {
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
           />
-          <input type="submit" value="Answer" />
+          <input type="submit" value="Submit" />
         </form>
-        <div className={styles.result}>{result}</div>
+        <div className={result ? styles.result : styles.hidden}>
+          <h4>Answer:</h4>
+          <div>{result}</div>
+        </div>
       </main>
     </div>
   );
