@@ -17,20 +17,44 @@ export default async function (req, res) {
   }
 
   try {
-    console.log("req: ", req);
-    const completion = await openai.createCompletion({
-      model: "text-davinci-003",
-      prompt: generatePrompt(req.body.value),
-      temperature: 0,
-      max_tokens: 100,
-      top_p: 1,
-      frequency_penalty: 0.0,
-      presence_penalty: 0.0,
-      stop: ["\n"],
-    });
-    res.status(200).json({ result: completion.data.choices[0].text });
+    const config = {
+      qa: {
+        model: "text-davinci-003",
+        prompt: generateQaPrompt(req.body.value),
+        temperature: 0,
+        max_tokens: 100,
+        top_p: 1,
+        frequency_penalty: 0.0,
+        presence_penalty: 0.0,
+        stop: ["\n"],
+      },
+      codeCompletion: {
+        model: "code-davinci-002",
+        prompt: `<|endoftext|>${generateCodePrompt(
+          req.body.value
+        )}\n--\nLabel:`,
+        temperature: 0,
+        max_tokens: 256,
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0,
+        stop: ["\n"],
+      },
+      imageGeneration: {
+        prompt: req.body.value,
+        n: 1,
+        size: "1024x1024",
+      },
+    };
+    const type = config[req.body.type];
+    if (req.body.type === "imageGeneration") {
+      const imageCompletion = await openai.createImage(type);
+      res.status(200).json({ imageUrl: imageCompletion.data.data[0].url });
+    } else {
+      const completion = await openai.createCompletion(type);
+      res.status(200).json({ result: completion.data.choices[0].text });
+    }
   } catch (error) {
-    // Consider adjusting the error handling logic for your use case
     if (error.response) {
       console.error(error.response.status, error.response.data);
       res.status(error.response.status).json(error.response.data);
@@ -45,20 +69,11 @@ export default async function (req, res) {
   }
 }
 
-// function generatePrompt(animal) {
-//   const capitalizedAnimal =
-//     animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-//   return `Suggest three names for an animal that is a superhero.
+function generateCodePrompt(question) {
+  return `# ${question}`;
+}
 
-//     Animal: Cat
-//     Names: Captain Sharpclaw, Agent Fluffball, The Incredible Feline
-//     Animal: Dog
-//     Names: Ruff the Protector, Wonder Canine, Sir Barks-a-Lot
-//     Animal: ${capitalizedAnimal}
-//     Names:`;
-// }
-
-function generatePrompt(question) {
+function generateQaPrompt(question) {
   return `I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery, or has no clear answer, I will respond with \"Unknown\".
     
     Q: What is human life expectancy in the United States?
